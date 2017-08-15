@@ -178,6 +178,9 @@ public class Meteor {
 		Boolean ssOut = Boolean.parseBoolean(props.getProperty("ssOut"));
 		Boolean vOut = Boolean.parseBoolean(props.getProperty("vOut"));
 		Boolean quiet = Boolean.parseBoolean(props.getProperty("quiet"));
+		if (writeAlignments) {
+			out.println("Document size: " + lines1.size());
+		}
 
 		for (int i = 0; i < lines1.size(); i++) {
 			MeteorStats stats;
@@ -198,9 +201,8 @@ public class Meteor {
 						+ stats.score);
 			}
 			if (writeAlignments) {
-				out.println(stats.alignment.toString("Alignment\t" + (i + 1)
-						+ "\t" + stats.precision + "\t" + stats.recall + "\t"
-						+ stats.fragPenalty + "\t" + stats.score));
+				//out.println(stats.alignment.toString("Alignment\t" + (i + 1) + "\t" + stats.score));
+				out.println("Alignment\t" + (i + 1) + "\t" + stats.score);
 			}
 			aggStats.addStats(stats);
 		}
@@ -411,7 +413,7 @@ public class Meteor {
 						String segLine = segName + segScore;
 						segLines.add(segLine);
 						// Store alignment and stats using seg key
-						segStats.put(segLine, stats);
+						//segStats.put(segLine, stats);
 					}
 					// End document: store score or SS
 					scorer.computeMetrics(docStats);
@@ -551,8 +553,6 @@ public class Meteor {
 				}
 				String lineNoScore = line.substring(0, idx);
 				out.println(stats.alignment.toString("Alignment\t"
-						+ lineNoScore + '\t' + stats.precision + "\t"
-						+ stats.recall + "\t" + stats.fragPenalty + "\t"
 						+ stats.score));
 			}
 			out.close();
