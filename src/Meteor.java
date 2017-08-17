@@ -583,7 +583,7 @@ public class Meteor {
 					refs.add(part[i].trim());
 				String test = part[part.length - 1].trim();
 				MeteorStats stats = scorer.getMeteorStats(test, refs);
-				System.out.println(stats.toString());
+				System.out.println("Score: " + stats.score);
 
 			} else if (line.startsWith("EVAL") || line.startsWith("eval")) {
 				String[] part = line.split("\\|\\|\\|");
@@ -593,7 +593,7 @@ public class Meteor {
 				}
 				MeteorStats stats = new MeteorStats(part[1].trim());
 				scorer.computeMetrics(stats);
-				System.out.println(stats.score);
+				System.out.println("Score: " + stats.score);
 
 			} else {
 				System.out.println("Error: specify SCORE or EVAL");
